@@ -54,5 +54,16 @@ contract('Marketplace', ( [deployer , seller , buyer ]) => {
 
 
         })
+
+        it('read product', async () => {
+
+            const product = await marketplace.products(productCount)
+            assert.equal(product.id.toNumber(), productCount.toNumber(), 'id is correct');
+            assert.equal(product.name , 'iPhone X' , 'name is correct');
+            assert.equal(product.price , '1000000000000000000' , 'price is correct');
+            assert.equal(product.owner ,seller  , 'owner is correct');
+            assert.equal(product.purchase, false, 'purchase is correproduct');
+
+        })
     })
 })
