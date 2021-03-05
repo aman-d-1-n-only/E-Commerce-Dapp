@@ -1,8 +1,9 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
+import classes from './Navbar.module.css';
 
 const navbar = (props) => (
-<Menu inverted stackable>
+<Menu inverted stackable className = { classes.navbar} >
         <Menu.Item
           name='marketplace'
         >
@@ -11,7 +12,8 @@ const navbar = (props) => (
 
         <Menu.Item
           name='sign-in'
-          position = 'right'  
+      position='right'
+      color = 'green'
     >
         {props.user}
         </Menu.Item>

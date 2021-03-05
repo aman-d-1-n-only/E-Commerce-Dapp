@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import Navbar from './Navbar'
-import MarketPlace from '../abis/Marketplace.json';
-import Web3 from 'web3'
-import './App.css';
+import React, { Component  } from 'react';
+import Navbar  from '../presentational/Navbar/Navbar'
+
+import MarketPlace from '../../abis/Marketplace.json';
+import Web3 from 'web3';
+
+import { Container , Header } from 'semantic-ui-react'
+import classes from './App.module.css'
 
 class App extends Component {
   state = {
@@ -59,18 +62,10 @@ class App extends Component {
     return (
       <div>
         <Navbar user={ this.state.account }/>
-        <div className="container-fluid mt-5">
-          <div className="row">
-            <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto">
-                <h1>Market Place</h1>
-                <p>
-                  Earn some money with your used stuff !!!
-                </p>
-              </div>
-            </main>
-          </div>
-        </div>
+        <Container className = {classes.main} fluid textAlign='center'>
+          <Header size='huge'>MarketPlace</Header>
+          <Header size='medium' color='green' >Earn some money with your used stuff !!!</Header>
+        </Container>
       </div>
     );
   }
