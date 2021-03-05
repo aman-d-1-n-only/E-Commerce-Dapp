@@ -15,7 +15,7 @@ const navbar = (props) => (
       position='right'
       color = 'green'
     >
-        {props.user}
+        {props.account}
         </Menu.Item>
       </Menu>
 );

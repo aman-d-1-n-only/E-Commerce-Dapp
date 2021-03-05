@@ -1,11 +1,12 @@
 import React, { Component  } from 'react';
-import Navbar  from '../presentational/Navbar/Navbar'
+import Navbar from '../presentational/Navbar/Navbar';
+import Main from '../presentational/Main/Main'
 
 import MarketPlace from '../../abis/Marketplace.json';
 import Web3 from 'web3';
 
-import { Container , Header } from 'semantic-ui-react'
-import classes from './App.module.css'
+import { Container, Header , Dimmer, Loader, Image, Segment} from 'semantic-ui-react';
+import classes from './App.module.css';
 
 class App extends Component {
   state = {
@@ -54,18 +55,26 @@ class App extends Component {
 
     this.setState({
       account: accounts[0],
-      marketplace: marketplace
+      loading:false,
+      marketplace: marketplace,
     });
   };
 
   render() {
     return (
       <div>
-        <Navbar user={ this.state.account }/>
+        <Navbar account={ this.state.account }/>
         <Container className = {classes.main} fluid textAlign='center'>
           <Header size='huge'>MarketPlace</Header>
           <Header size='medium' color='green' >Earn some money with your used stuff !!!</Header>
         </Container>
+        {this.state.loading ?
+          <Segment>
+            <Dimmer active inverted>
+              <Loader size='small'>Loading</Loader>
+            </Dimmer>
+            <Image src='https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80' />
+          </Segment> : <Main />}
       </div>
     );
   }
