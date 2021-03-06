@@ -49,6 +49,8 @@ class App extends Component {
         marketplace = new web3.eth.Contract(
         MarketPlace.abi , deployedNetwork.address
       );
+      const productCount = await marketplace.methods.productCount().call();
+      console.log(productCount.toString());
     } else {
       alert('Contract is not deployed to the network !');
     }
@@ -57,6 +59,15 @@ class App extends Component {
       account: accounts[0],
       loading:false,
       marketplace: marketplace,
+    });
+  };
+
+  createProduct(name, price) {
+    this.setState({ loading: true });
+    this.state.marketplace.methods.createProduct(name, price).send({
+      from: this.state.account
+    }).on('reciept', recept => {
+      this.setState({ loading: false });
     });
   };
 
@@ -74,7 +85,7 @@ class App extends Component {
               <Loader size='small'>Loading</Loader>
             </Dimmer>
             <Image src='https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80' />
-          </Segment> : <Main />}
+          </Segment> : <Main createProduct = {this.createProduct.bind(this)} />}
       </div>
     );
   }
