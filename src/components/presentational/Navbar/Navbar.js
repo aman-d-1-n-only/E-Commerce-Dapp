@@ -7,7 +7,7 @@ const navbar = (props) => (
         <Menu.Item
           name='marketplace'
         >
-          MarketPlace
+          E-commerce DAPP
         </Menu.Item>
 
         <Menu.Item

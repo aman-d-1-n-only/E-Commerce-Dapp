@@ -92,7 +92,7 @@ class App extends Component {
       <div>
         <Navbar account={ this.state.account }/>
         <Container className = {classes.header} fluid textAlign='center'>
-          <Header size='huge'>MarketPlace</Header>
+          <Header size='huge'>E-Commerce DAPP</Header>
           <Header size='medium' color='green' >Earn some money with your used stuff !!!</Header>
         </Container>
         {this.state.loading ?
