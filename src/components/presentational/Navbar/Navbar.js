@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 import classes from './Navbar.module.css';
 
 const navbar = (props) => (
-<Menu inverted stackable className = { classes.navbar} >
+<Menu fixed inverted stackable className = { classes.navbar} >
         <Menu.Item
           name='marketplace'
         >

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Table , Header , Form , Container } from 'semantic-ui-react'
+import { Button, Table, Header, Form, Container } from 'semantic-ui-react';
 
+import classes from './Main.module.css'
 class Main extends Component {
 
     createProductHandler = (event) => {
@@ -9,10 +10,10 @@ class Main extends Component {
         const price = window.web3.utils.toWei(this.productPrice.value.toString() , 'Ether' );
         this.props.createProduct(name, price);
     }
-    
+
     render() {
         return (
-            <Container>
+            <Container className = { classes.main}>
                 <h1>Add Product</h1>
                 <Form onSubmit={ event => this.createProductHandler(event) }>
                     <Form.Field>
@@ -29,7 +30,7 @@ class Main extends Component {
                         <Table.Row>
                             <Table.HeaderCell singleLine>Sr. No.</Table.HeaderCell>
                             <Table.HeaderCell>Name</Table.HeaderCell>
-                            <Table.HeaderCell>Price(Ethers)</Table.HeaderCell>
+                            <Table.HeaderCell>Price(Ethers  )</Table.HeaderCell>
                             <Table.HeaderCell>Owner</Table.HeaderCell>
                             <Table.HeaderCell>Buy</Table.HeaderCell>
                         </Table.Row>
@@ -51,7 +52,14 @@ class Main extends Component {
                                         {product.owner}
                                 </Table.Cell>
                                     <Table.Cell>
-                                        <Button primary >Buy</Button>
+                                        { !product.purchase ? 
+                                            <Button
+                                            name={product.id}
+                                            value={product.price}
+                                            onClick={event => {
+                                            this.props.purchaseProduct(event.target.name , event.target.value)
+                                            }}
+                                            primary >Buy</Button> : 'Purchased' }
                                     </Table.Cell>
                                 </Table.Row>
                             );

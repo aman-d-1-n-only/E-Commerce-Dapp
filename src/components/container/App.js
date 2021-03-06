@@ -73,16 +73,25 @@ class App extends Component {
     this.setState({ loading: true });
     this.state.marketplace.methods.createProduct(name, price).send({
       from: this.state.account
-    }).on('reciept', recept => {
+    }).on('reciept', reciept => {
       this.setState({ loading: false });
     });
   };
 
+  purchaseProduct( id, value) {
+    this.setState({ loading: true });
+    this.state.marketplace.methods.purchaseProduct(id).send({
+      from: this.state.account,
+      value: value
+    }).on('reciept', reciept => {
+      this.setState({ loading: false });
+    });
+  };
   render() {
     return (
       <div>
         <Navbar account={ this.state.account }/>
-        <Container className = {classes.main} fluid textAlign='center'>
+        <Container className = {classes.header} fluid textAlign='center'>
           <Header size='huge'>MarketPlace</Header>
           <Header size='medium' color='green' >Earn some money with your used stuff !!!</Header>
         </Container>
@@ -92,7 +101,11 @@ class App extends Component {
               <Loader size='small'>Loading</Loader>
             </Dimmer>
             <Image src='https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80' />
-          </Segment> : <Main products={ this.state.products} createProduct = {this.createProduct.bind(this)} />}
+          </Segment> :
+          <Main
+            products={this.state.products}
+            createProduct={this.createProduct.bind(this)}
+            purchaseProduct={ this.purchaseProduct.bind(this)} />}
       </div>
     );
   }
